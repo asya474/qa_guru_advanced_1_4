@@ -1,7 +1,7 @@
+
 import json
 import os
 from http import HTTPStatus
-
 import dotenv
 import pytest
 import requests
@@ -15,6 +15,7 @@ def envs():
 @pytest.fixture(scope="session")
 def app_url():
     return os.getenv("APP_URL")
+
 
 @pytest.fixture(scope="module")
 def fill_test_data(app_url):
@@ -38,4 +39,3 @@ def users(app_url):
     response = requests.get(f"{app_url}/api/users/")
     assert response.status_code == HTTPStatus.OK
     return response.json()
-
