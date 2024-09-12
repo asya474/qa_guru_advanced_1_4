@@ -1,0 +1,1 @@
+INFO     root:base_session.py:18 curl -X GET -H 'Accept: */*' -H 'Accept-Encoding: gzip, deflate' -H 'Connection: keep-alive' -H 'User-Agent: python-requests/2.32.3' https://reqres.in/api/users/2

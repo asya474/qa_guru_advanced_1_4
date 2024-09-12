@@ -1,4 +1,3 @@
-
 from pytest_voluptuous import S
 
 from schemas.reqres import response_list_users
