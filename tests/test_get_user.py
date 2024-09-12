@@ -1,10 +1,4 @@
-import json
-import pytest
-import requests
-from jsonschema import validate
-from http import HTTPStatus
-from random import randint
-from model.reqres import ResponseGetUser, User, ResponseUser, Reqres, UserCreate, UserUpdate
+from model.reqres import ResponseGetUser, User, ResponseUser, Reqres
 from faker import Faker
 
 fake = Faker()
