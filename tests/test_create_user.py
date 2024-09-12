@@ -1,13 +1,13 @@
 
 from http import HTTPStatus
-
+from datetime import datetime
 from model.reqres import Reqres
 from model.response_create_user import ResponseCreateUser
 
 
 def test_create_user(env):
     expected_response_create_user = ResponseCreateUser(
-    name="morpheus", job="leader", id="506", created_at="2024-09-12T17:27:35.495Z")
+    name="morpheus", job="leader", id="506", created_at=datetime.datetime.now(datetime.UTC))
 
     result_response_create_user = Reqres(env).create_user(name="morpheus", job="leader")
 
