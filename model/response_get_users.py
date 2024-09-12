@@ -1,7 +1,7 @@
 from model.response_user import ResponseUser
 
 
-class ResponseListUsers:
+class ResponseGetUsers:
     def __init__(self, **kwargs):
         json_ = kwargs.pop("json", {})
 

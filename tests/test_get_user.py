@@ -1,4 +1,6 @@
-from model.reqres import ResponseGetUser, User, ResponseUser, Reqres
+from model.response_get_user import ResponseGetUser
+from model.response_user import ResponseUser
+from model.reqres import Reqres
 from faker import Faker
 
 fake = Faker()

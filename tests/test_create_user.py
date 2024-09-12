@@ -1,22 +1,16 @@
-import json
-import pytest
-import requests
-from jsonschema import validate
+
 from http import HTTPStatus
-from random import randint
-from model.reqres import ResponseGetUser, User, ResponseUser, Reqres, UserCreate, UserUpdate
-from faker import Faker
 
-fake = Faker()
+from model.reqres import Reqres
+from model.response_create_user import ResponseCreateUser
+
+
 def test_create_user(env):
-    data = {"first_name": fake.first_name(),
-            "last_name": fake.last_name(),
-            "email": fake.free_email(),
-            "avatar": f"https://reqres.in/img/faces/{randint(1, 1000)}-image.jpg"}
+    expected_response_create_user = ResponseCreateUser(
+    name="morpheus", job="leader", id="506", created_at="2024-09-12T17:27:35.495Z")
 
-    result_response_create_user = requests.post(f"{app_url}/api/users/", data=json.dumps(data))
+    result_response_create_user = Reqres(env).create_user(name="morpheus", job="leader")
 
     assert result_response_create_user.status_code == HTTPStatus.CREATED
 
-    user = result_response_create_user.json()
-    UserCreate.model_validate(user)
+    assert result_response_create_user.json == expected_response_create_user.json
