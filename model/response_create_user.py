@@ -1,4 +1,4 @@
-from response_user import ResponseUser
+
 class ResponseCreateUser:
     def __init__(self, **kwargs):
         json_ = kwargs.pop("json", {})

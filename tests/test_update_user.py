@@ -1,12 +1,9 @@
-import json
 from datetime import datetime
-
-import requests
 from http import HTTPStatus
 from model.reqres import Reqres
 from model.response_update_user import ResponseUpdateUser
-from model.response_user import ResponseUser
-
+from schemas.reqres import response_update_user
+from pytest_voluptuous import S
 
 def test_update_user(env):
 
@@ -19,3 +16,7 @@ def test_update_user(env):
     result_response_update_user = Reqres(env).update_user(2)
     assert result_response_update_user.status_code == HTTPStatus.OK
     assert result_response_update_user.json == expected_response_update_user.json
+
+def test_response_update_user(reqresin):
+    response = Reqres(env).update_user(2)
+    assert S(response_update_user) == response.json()

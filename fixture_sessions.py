@@ -1,6 +1,4 @@
-
 import pytest
-
 from utils.base_session import BaseSession
 from config import Server
 

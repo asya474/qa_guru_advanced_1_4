@@ -1,6 +1,3 @@
-import json
-from random import randint
-
 from model.response_create_user import ResponseCreateUser
 from model.response_delete_user import ResponseDeleteUser
 from model.response_get_users import ResponseGetUsers

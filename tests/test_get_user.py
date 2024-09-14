@@ -1,9 +1,9 @@
 from model.response_get_user import ResponseGetUser
 from model.response_user import ResponseUser
 from model.reqres import Reqres
-from faker import Faker
+from pytest_voluptuous import S
+from schemas.reqres import  response_get_user
 
-fake = Faker()
 
 def test_get_user(env):
     expected_response_get_user = ResponseGetUser(data=ResponseUser(
@@ -18,3 +18,7 @@ def test_get_user(env):
 
     assert result_response_get_user.support_url == expected_response_get_user.support_url
     assert result_response_get_user.json == expected_response_get_user.json
+
+def test_response_get_user(reqresin):
+    response = Reqres(env).get_user(2)
+    assert S(response_get_user) == response.json()

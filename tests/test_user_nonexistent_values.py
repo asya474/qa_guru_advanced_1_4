@@ -1,9 +1,6 @@
 import pytest
-import requests
 from http import HTTPStatus
-
 from model.reqres import Reqres
-
 
 @pytest.mark.parametrize("user_id", [99])
 def test_user_nonexistent_values(env, user_id):

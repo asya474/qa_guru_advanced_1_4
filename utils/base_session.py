@@ -1,6 +1,4 @@
-
 import logging
-
 import curlify
 from requests import Session
 

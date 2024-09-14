@@ -1,18 +1,14 @@
-import json
 import pytest
-import requests
-from jsonschema import validate
 from http import HTTPStatus
-from random import randint
-from model.reqres import ResponseGetUser, User, ResponseUser, Reqres, UserCreate, UserUpdate
-from faker import Faker
+from model.reqres import Reqres
+from pytest_voluptuous import S
+from schemas.reqres import response_list_users
 
-fake = Faker()
-@pytest.mark.usefixtures("fill_test_data")
-def test_users(app_url):
-    response = requests.get(f"{app_url}/api/users/")
-    assert response.status_code == HTTPStatus.OK
+@pytest.mark.usefixtures(env)
+def test_users(env):
+    result_users_response = Reqres(env).get_users()
+    assert result_users_response.status_code == HTTPStatus.OK
 
-    user_list = response.json()
-    for user in user_list:
-        User.model_validate(user)
+def test_response_list_users(reqresin):
+    response = reqresin.get("/api/users", verify=False)
+    assert S(response_list_users) == response.json()
