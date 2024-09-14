@@ -14,7 +14,7 @@ def test_get_user(env):
         avatar="https://reqres.in/img/faces/2-image.jpg"
     ))
 
-    result_response_get_user = Reqres(env).update_user(2)
+    result_response_get_user = Reqres(env).get_user(2)
 
     assert result_response_get_user.support_url == expected_response_get_user.support_url
     assert result_response_get_user.json == expected_response_get_user.json
