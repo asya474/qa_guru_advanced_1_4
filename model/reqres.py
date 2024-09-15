@@ -71,7 +71,7 @@ class ResponseGetUser:
     def __init__(self, **kwargs):
         response = kwargs.pop("response", None)
         json_ = kwargs.pop("json", response.json() if response else None)
-        self._data = kwargs.pop("data", ResponseUser()).json
+        self._data = kwargs.pop("data", ResponseUser())._json
         self._json = json_ if json_ else {
             "data": self._data,
             "support": {
@@ -146,6 +146,7 @@ class ResponseUpdateUser:
 class ResponseDeleteUser:
     def __init__(self, **kwargs):
         response = kwargs.pop("response", None)
+
 
 class Reqres:
     def __init__(self, env):
