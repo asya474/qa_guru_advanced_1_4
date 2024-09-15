@@ -1,8 +1,7 @@
 from datetime import datetime
 from http import HTTPStatus
-from ..model.reqres import Reqres
-from ..model.response_update_user import ResponseUpdateUser
-from ..schemas.reqres import response_update_user
+from model.reqres import Reqres, ResponseUpdateUser
+from schemas.reqres import response_update_user
 from pytest_voluptuous import S
 
 def test_update_user(env):

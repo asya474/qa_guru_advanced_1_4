@@ -1,4 +1,4 @@
-from ..model.reqres import Reqres
+from model.reqres import Reqres
 import pytest
 from http import HTTPStatus
 @pytest.mark.parametrize("user_id", [-1, 0, "fafaf"])

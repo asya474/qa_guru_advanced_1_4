@@ -1,6 +1,5 @@
-from ..model.reqres import Reqres
-from ..model.response_create_user import ResponseCreateUser
-from ..schemas.reqres import response_create_user
+from model.reqres import Reqres, ResponseCreateUser
+from schemas.reqres import response_create_user
 from pytest_voluptuous import S
 from datetime import datetime
 from http import HTTPStatus

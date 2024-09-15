@@ -1,5 +1,5 @@
-from ..model.reqres import Reqres
-from ..schemas.reqres import response_list_users
+from model.reqres import Reqres
+from schemas.reqres import response_list_users
 from pytest_voluptuous import S
 import pytest
 from http import HTTPStatus

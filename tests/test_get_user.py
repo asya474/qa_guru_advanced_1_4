@@ -1,8 +1,7 @@
-from ..model.response_get_user import ResponseGetUser
-from ..model.response_user import ResponseUser
-from ..model.reqres import Reqres
-from ..schemas.reqres import  response_get_user
+from schemas.reqres import response_get_user
 from pytest_voluptuous import S
+from model.reqres import Reqres, ResponseGetUser, ResponseUser
+
 
 def test_get_user(env):
     expected_response_get_user = ResponseGetUser(data=ResponseUser(
