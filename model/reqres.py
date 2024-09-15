@@ -1,8 +1,7 @@
-from datetime import datetime, timezone
-
+from http import HTTPStatus
 from utils.base_session import BaseSession
 from config import Server
-
+from typing import TypedDict, Dict, Any
 
 class User:
     def __init__(self, **kwargs):
@@ -49,6 +48,12 @@ class Support:
     def json(self):
         return self._json
 
+class UserData(TypedDict):
+    id: int
+    email: str
+    first_name: str
+    last_name: str
+    avatar: str
 
 class ResponseUser:
     def __init__(self, **kwargs):
@@ -58,7 +63,7 @@ class ResponseUser:
         self._first_name = kwargs.pop("first_name", "Janet")
         self._last_name = kwargs.pop("last_name", "Weaver")
         self._avatar = kwargs.pop("avatar", "https://reqres.in/img/faces/2-image.jpg")
-        self._json = json_ if json_ else {
+        self._json: UserData = json_ if json_  else {
             "id": self._id,
             "email": self._email,
             "first_name": self._first_name,
@@ -79,6 +84,7 @@ class ResponseGetUser:
                 "text": "To keep ReqRes free, contributions towards server costs are appreciated!"
             }
         }
+        self._status_code = None
 
     @property
     def json(self):
@@ -89,8 +95,13 @@ class ResponseGetUser:
         return self._json['support']['url']
 
     @property
-    def support_text(self):
-        return self._json['support']['text']
+    def status_code(self):
+         if not isinstance(self._data['id'], int) or self._data['id'] <= 1:
+            return HTTPStatus.UNPROCESSABLE_ENTITY
+        elif self._data['id'] > 50:
+            return HTTPStatus.NOT_FOUND
+        else:
+            return HTTPStatus.OK
 
 
 class ResponseGetUsers:
@@ -133,18 +144,12 @@ class ResponseUpdateUser:
 
         self._json = json_ if json_ else {
             "name": "morpheus",
-            "job": "zion resident",
-            "updatedAt": str(datetime.now(timezone.utc))
+            "job": "zion resident"
         }
 
     @property
     def json(self):
         return self._json
-
-
-class ResponseDeleteUser:
-    def __init__(self, **kwargs):
-        response = kwargs.pop("response", None)
 
 
 class Reqres:
@@ -162,6 +167,3 @@ class Reqres:
 
     def update_user(self, user_id: int):
         return ResponseUpdateUser(response=self.session.patch(f"/api/users/{user_id}"))
-
-    def delete_user(self, user_id: int):
-        return ResponseDeleteUser(response=self.session.delete(f"/api/users/{user_id}"))

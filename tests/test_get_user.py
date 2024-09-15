@@ -1,9 +1,6 @@
 from schemas.reqres import response_get_user
 from pytest_voluptuous import S
 from model.reqres import Reqres, ResponseGetUser, ResponseUser
-import json
-import requests
-from jsonschema import validate
 
 def test_get_user(env):
     expected_response_get_user = ResponseGetUser(data=ResponseUser(
