@@ -1,13 +1,12 @@
-from http import HTTPStatus
-from datetime import datetime
-from model.reqres import Reqres
-from model.response_create_user import ResponseCreateUser
+from ..model.reqres import Reqres
+from ..model.response_create_user import ResponseCreateUser
+from ..schemas.reqres import response_create_user
 from pytest_voluptuous import S
-from schemas.reqres import response_create_user
-
+from datetime import datetime
+from http import HTTPStatus
 def test_create_user(env):
     expected_response_create_user = ResponseCreateUser(
-    name="morpheus", job="leader", id="506", created_at=datetime.datetime.now(datetime.UTC))
+    name="morpheus", job="leader", id="506", created_at=str(datetime.datetime.now(datetime.UTC)))
 
     result_response_create_user = Reqres(env).create_user(name="morpheus", job="leader")
 

@@ -1,4 +1,4 @@
-from voluptuous import Schema, All, Length, PREVENT_EXTRA, Required
+from voluptuous import Schema, All, Length, PREVENT_EXTRA
 
 user = Schema(
     {

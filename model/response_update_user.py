@@ -8,7 +8,7 @@ class ResponseUpdateUser:
         self._json = json_ if json_ else {
         "name": "morpheus",
         "job": "zion resident",
-        "updatedAt": datetime.datetime.now(datetime.UTC)
+        "updatedAt": str(datetime.datetime.now(datetime.UTC))
         }
 
     @property
