@@ -1,3 +1,4 @@
+from random import randint
 from model.reqres import Reqres, ResponseCreateUser
 from schemas.reqres import response_create_user
 from pytest_voluptuous import S
@@ -13,6 +14,6 @@ def test_create_user(env):
     assert result_response_create_user.json == expected_response_create_user.json
 
 
-def test_response_create_user(reqresin):
-    response = Reqres(env).create_user(name="morpheus", job="leader")
-    assert S(response_create_user) == response.json()
+def test_response_create_user(env, reqresin):
+    response = Reqres(env).create_user(user_id=randint(0, 1000))
+    assert S(response_create_user) == response.json

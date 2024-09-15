@@ -19,6 +19,6 @@ def test_get_user(env):
     assert result_response_get_user.support_url == expected_response_get_user.support_url
     assert result_response_get_user.json == expected_response_get_user.json
 
-def test_response_get_user(reqresin):
+def test_response_get_user(env, reqresin):
     response = Reqres(env).get_user(2)
-    assert S(response_get_user) == response.json()
+    assert S(response_get_user) == response.json

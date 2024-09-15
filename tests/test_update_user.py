@@ -16,6 +16,6 @@ def test_update_user(env):
     assert result_response_update_user.status_code == HTTPStatus.OK
     assert result_response_update_user.json == expected_response_update_user.json
 
-def test_response_update_user(reqresin):
+def test_response_update_user(env, reqresin):
     response = Reqres(env).update_user(2)
-    assert S(response_update_user) == response.json()
+    assert S(response_update_user) == response.json

@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from utils.base_session import BaseSession
 from config import Server
@@ -117,7 +117,6 @@ class ResponseGetUsers:
 class ResponseCreateUser:
     def __init__(self, **kwargs):
         json_ = kwargs.pop("json", {})
-
         self._json = json_ if json_ else {
             "name": "morpheus",
             "job": "leader"
@@ -135,7 +134,7 @@ class ResponseUpdateUser:
         self._json = json_ if json_ else {
             "name": "morpheus",
             "job": "zion resident",
-            "updatedAt": str(datetime.datetime.now(datetime.UTC))
+            "updatedAt": str(datetime.now(timezone.utc))
         }
 
     @property
