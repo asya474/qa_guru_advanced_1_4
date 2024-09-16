@@ -12,3 +12,7 @@ sqlmodel~=0.0.21
 fastapi-pagination
 
 uvicorn~=0.30.3
+curlify
+pytest
+voluptuous
+pytest-voluptuous

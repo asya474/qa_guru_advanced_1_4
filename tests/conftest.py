@@ -1,41 +1,21 @@
-import json
 import os
-from http import HTTPStatus
-
-import dotenv
+import shutil
 import pytest
-import requests
+pytest_plugins = ['fixture_sessions']
 
 
-@pytest.fixture(scope="session", autouse=True)
-def envs():
-    dotenv.load_dotenv()
+def pytest_addoption(parser):
+    parser.addoption("--env", default="dev")
 
 
 @pytest.fixture(scope="session")
-def app_url():
-    return os.getenv("APP_URL")
+def env(request):
+    return request.config.getoption("--env")
 
-@pytest.fixture(scope="module")
-def fill_test_data(app_url):
-    with open("users.json") as f:
-        test_data_users = json.load(f)
-    api_users = []
-    for user in test_data_users:
-        response = requests.post(f"{app_url}/api/users/", json=user)
-        api_users.append(response.json())
-
-    user_ids = [user["id"] for user in api_users]
-
-    yield user_ids
-
-    for user_id in user_ids:
-        requests.delete(f"{app_url}/api/users/{user_id}")
-
-
-@pytest.fixture
-def users(app_url):
-    response = requests.get(f"{app_url}/api/users/")
-    assert response.status_code == HTTPStatus.OK
-    return response.json()
-
+@pytest.fixture(scope='session', autouse=True)
+def clean_allure_results():
+    allure_dir = 'allure-results'
+    if os.path.exists(allure_dir):
+        shutil.rmtree(allure_dir)
+        print(f"Директория '{allure_dir}' очищена.")
+    os.makedirs(allure_dir, exist_ok=True)
