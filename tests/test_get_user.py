@@ -1,3 +1,5 @@
+import pytest
+
 from schemas.reqres import response_get_user
 from pytest_voluptuous import S
 from model.reqres import Reqres, ResponseGetUser, ResponseUser

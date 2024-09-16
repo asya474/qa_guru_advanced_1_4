@@ -96,13 +96,12 @@ class ResponseGetUser:
 
     @property
     def status_code(self):
-         if not isinstance(self._data['id'], int) or self._data['id'] <= 1:
+        if not isinstance(self._data['id'], int) or self._data['id'] < 1:
             return HTTPStatus.UNPROCESSABLE_ENTITY
         elif self._data['id'] > 50:
             return HTTPStatus.NOT_FOUND
         else:
             return HTTPStatus.OK
-
 
 class ResponseGetUsers:
     def __init__(self, **kwargs):
